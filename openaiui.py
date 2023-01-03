@@ -6,14 +6,17 @@ import dash_bootstrap_components as dbc
 import textwrap
 import openai
 
+# OpenAI API key
+
+
 # Dash app
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-server = app.server
+server = app.server 
 # Dash layout
 app.layout = html.Div(className='container',
     children=[
         html.Div([
-            html.H1('GPT-3 Test Environment', style={'alignText':'center'}),
+            html.H1('AI Code Assistant', style={'alignText':'center'}),
             html.Hr(),
             html.Div(className='row', 
                 children=[
@@ -185,20 +188,20 @@ html.Div([
                                     {'label': '10', 'value': 10}
                                 ],
                                 value=1
-                            )])
+                            )]),
 # Dash callback
 @app.callback(
     dash.dependencies.Output('output', 'children'),
     [dash.dependencies.Input('generate', 'n_clicks')],
     [dash.dependencies.State('prompt', 'value'),
-    dash.dependencies.State('temperature', 'value'),
-    dash.dependencies.State('top_p', 'value'),
-    dash.dependencies.State('n', 'value'),
-    dash.dependencies.State('max_tokens', 'value'),
-    dash.dependencies.State('frequency_penalty', 'value'),
-    dash.dependencies.State('presence_penalty', 'value'),
-    dash.dependencies.State('stop', 'value'),
-    dash.dependencies.State('engine', 'value')])
+     dash.dependencies.State('temperature', 'value'),
+     dash.dependencies.State('top_p', 'value'),
+     dash.dependencies.State('n', 'value'),
+     dash.dependencies.State('max_tokens', 'value'),
+     dash.dependencies.State('frequency_penalty', 'value'),
+     dash.dependencies.State('presence_penalty', 'value'),
+     dash.dependencies.State('stop', 'value'),
+     dash.dependencies.State('engine', 'value')])
 def update_output(n_clicks, prompt, temperature, top_p, n, max_tokens, frequency_penalty, presence_penalty, stop, engine):
     if n_clicks > 0:
         response = openai.Completion.create(
