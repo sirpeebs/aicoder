@@ -143,11 +143,11 @@ app.layout = html.Div(className='container',
                                                 id='engine',
                                                 value='code-davinci-002',
                                                 options=[
-                                                    {'label': 'code', 'value': 'code-davinci-002'},                                                    
-                                                    {'label': 'davinci', 'value': 'text-davinci-003'},
-                                                    {'label': 'curie', 'value': 'text-curie-001'},
-                                                    {'label': 'ada', 'value': 'text-ada-001'},
-                                                    {'label': 'babbage', 'value': 'text-babbage-001'}
+                                                    {'label': 'code', 'value': 'code-davinci-002'}                                                    
+#                                                     {'label': 'davinci', 'value': 'text-davinci-003'},
+#                                                     {'label': 'curie', 'value': 'text-curie-001'},
+#                                                     {'label': 'ada', 'value': 'text-ada-001'},
+#                                                     {'label': 'babbage', 'value': 'text-babbage-001'}
                                                 ],
                                                 style={'marginBottom':'.25rem'}
                                             )
