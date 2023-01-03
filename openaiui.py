@@ -7,7 +7,7 @@ import textwrap
 import openai
 
 # OpenAI API key
-
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Dash app
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
