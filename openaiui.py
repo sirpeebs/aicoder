@@ -23,9 +23,9 @@ app.layout = html.Div(className='container',
                     html.Div(className='col-md-8', children=[
                         dcc.Textarea(
                             id='prompt',
-                            value=str('\* Language: Python 3 */'),
+                            value=str(''),
                             placeholder='Enter a prompt',
-                            style={'width': '100%', 'height': '98.5%', 'marginBottom':'10px', 'paddingBottom':'10px'}
+                            style={'width': '100%', 'height': '48.5%', 'marginBottom':'10px', 'paddingBottom':'10px'}
                         )
                     ]
                 ),
@@ -36,6 +36,21 @@ app.layout = html.Div(className='container',
                                 html.Div(
                                     className='row',
                                     children=[
+                                    html.Div([
+                                        html.P('Language', style={'fontWeight':'bold', 'marginBottom':'0rem'}),
+                                        dcc.Dropdown(
+                                            id='language',
+                                            value='\* Language: Python 3"""',
+                                            options=[
+                                                {'label': 'Python 3', 'value': '\* Language: Python 3"""'},                                                    
+                                                {'label': 'Node.JS', 'value': '\* Language: node.js"""'},
+                                                {'label': 'SQL', 'value': '\* Language: SQL"""'},
+                                                {'label': 'Typescript', 'value': '\* Language: TypeScript"""'},
+                                                {'label': 'Bash', 'value': '\* Language: Bash"""'}
+                                            ],
+                                            style={'marginBottom':'.25rem'}
+                                        ),
+                                        ], className='row'),
                                         html.P('CREATIVITY', style={'fontWeight':'bold', 'marginBottom':'0rem'}),
                                         dcc.Slider(
                                             id='temperature',
@@ -138,21 +153,20 @@ app.layout = html.Div(className='container',
                                         )
                                     ], className='row'),
                                     html.Div([
-                                            html.P('Model/Engine', style={'fontWeight':'bold', 'marginBottom':'0rem'}),
-                                            dcc.Dropdown(
+                                            dcc.Store(
                                                 id='engine',
-                                                value='code-davinci-002',
-                                                options=[
-                                                    {'label': 'code', 'value': 'code-davinci-002'}                                                    
-#                                                     {'label': 'davinci', 'value': 'text-davinci-003'},
-#                                                     {'label': 'curie', 'value': 'text-curie-001'},
-#                                                     {'label': 'ada', 'value': 'text-ada-001'},
-#                                                     {'label': 'babbage', 'value': 'text-babbage-001'}
-                                                ],
-                                                style={'marginBottom':'.25rem'}
+                                                data='code-davinci-002'
+                                                # options=[
+                                                #     {'label': 'code', 'value': 'code-davinci-002'},                                                    
+                                                #     {'label': 'davinci', 'value': 'text-davinci-003'},
+                                                #     {'label': 'curie', 'value': 'text-curie-001'},
+                                                #     {'label': 'ada', 'value': 'text-ada-001'},
+                                                #     {'label': 'babbage', 'value': 'text-babbage-001'}
+                                                # ],
+                                                # style={'marginBottom':'.25rem'}
                                             )
                                         ], className='row')
-                                    ]
+                                     ]       
                                 ),
                             ]
                         ),
@@ -201,11 +215,12 @@ html.Div([
      dash.dependencies.State('frequency_penalty', 'value'),
      dash.dependencies.State('presence_penalty', 'value'),
      dash.dependencies.State('stop', 'value'),
-     dash.dependencies.State('engine', 'value')])
-def update_output(n_clicks, prompt, temperature, top_p, n, max_tokens, frequency_penalty, presence_penalty, stop, engine):
+     dash.dependencies.State('engine', 'data'),
+     dash.dependencies.State('language', 'value')])
+def update_output(n_clicks, prompt, temperature, top_p, n, max_tokens, frequency_penalty, presence_penalty, stop, engine, language):
     if n_clicks > 0:
         response = openai.Completion.create(
-            prompt=prompt,
+            prompt= language + prompt + "'''*/",
             temperature=temperature,
             top_p=top_p,
             n=n,
