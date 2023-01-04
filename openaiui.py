@@ -2,21 +2,19 @@ import os
 import dash
 from dash import Dash, dcc, html, Input, Output, State
 import dash_bootstrap_components as dbc
-
 import textwrap
 import openai
 
 # OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
-
 # Dash app
+
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server 
 # Dash layout
 app.layout = html.Div(className='container',
     children=[
         html.Div([
-            html.H1('AI Code Assistant', style={'alignText':'center'}),
             html.Hr(),
             html.Div(className='row', 
                 children=[
@@ -40,13 +38,13 @@ app.layout = html.Div(className='container',
                                         html.P('Language', style={'fontWeight':'bold', 'marginBottom':'0rem'}),
                                         dcc.Dropdown(
                                             id='language',
-                                            value='\* Language: Python 3"""',
+                                            value='\* Language: Python 3 \r\n',
                                             options=[
-                                                {'label': 'Python 3', 'value': '\* Language: Python 3"""'},                                                    
-                                                {'label': 'Node.JS', 'value': '\* Language: node.js"""'},
-                                                {'label': 'SQL', 'value': '\* Language: SQL"""'},
-                                                {'label': 'Typescript', 'value': '\* Language: TypeScript"""'},
-                                                {'label': 'Bash', 'value': '\* Language: Bash"""'}
+                                                {'label': 'Python 3', 'value': '\* Language: Python 3 \r\n'},                                                    
+                                                {'label': 'Node.JS', 'value': '\* Language: node.js \r\n'},
+                                                {'label': 'SQL', 'value': '\* Language: SQL \r\n'},
+                                                {'label': 'Typescript', 'value': '\* Language: TypeScript \r\n'},
+                                                {'label': 'Bash', 'value': '\* Language: Bash \r\n'}
                                             ],
                                             style={'marginBottom':'.25rem'}
                                         ),
@@ -166,7 +164,7 @@ app.layout = html.Div(className='container',
                                                 # style={'marginBottom':'.25rem'}
                                             )
                                         ], className='row')
-                                     ]       
+                                    ]       
                                 ),
                             ]
                         ),
@@ -208,19 +206,19 @@ html.Div([
     dash.dependencies.Output('output', 'children'),
     [dash.dependencies.Input('generate', 'n_clicks')],
     [dash.dependencies.State('prompt', 'value'),
-     dash.dependencies.State('temperature', 'value'),
-     dash.dependencies.State('top_p', 'value'),
-     dash.dependencies.State('n', 'value'),
-     dash.dependencies.State('max_tokens', 'value'),
-     dash.dependencies.State('frequency_penalty', 'value'),
-     dash.dependencies.State('presence_penalty', 'value'),
-     dash.dependencies.State('stop', 'value'),
-     dash.dependencies.State('engine', 'data'),
-     dash.dependencies.State('language', 'value')])
+    dash.dependencies.State('temperature', 'value'),
+    dash.dependencies.State('top_p', 'value'),
+    dash.dependencies.State('n', 'value'),
+    dash.dependencies.State('max_tokens', 'value'),
+    dash.dependencies.State('frequency_penalty', 'value'),
+    dash.dependencies.State('presence_penalty', 'value'),
+    dash.dependencies.State('stop', 'value'),
+    dash.dependencies.State('engine', 'data'),
+    dash.dependencies.State('language', 'value')])
 def update_output(n_clicks, prompt, temperature, top_p, n, max_tokens, frequency_penalty, presence_penalty, stop, engine, language):
     if n_clicks > 0:
         response = openai.Completion.create(
-            prompt= language + prompt + "'''*/",
+            prompt= language + prompt + " \r\n*/",
             temperature=temperature,
             top_p=top_p,
             n=n,
@@ -237,4 +235,4 @@ def update_output(n_clicks, prompt, temperature, top_p, n, max_tokens, frequency
         return ''
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=1090)
+    app.run_server(debug=False)
