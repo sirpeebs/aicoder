@@ -25,7 +25,7 @@ app.layout = html.Div(className='container',
                             id='prompt',
                             value=str(''),
                             placeholder='Enter a prompt',
-                            style={'width': '100%', 'height': '48.5%', 'marginBottom':'10px', 'paddingBottom':'10px'}
+                            style={'width': '100%', 'height': '98.5%', 'marginBottom':'10px', 'paddingBottom':'10px'}
                         )
                     ]
                 ),
