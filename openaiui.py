@@ -169,6 +169,9 @@ server = app.server
 # Dash layout
 app.layout = html.Div(className='container',
     children=[
+        Html.Div([
+            html.Img(src='https://fastfile.cloud/gptdevlogo.png', style={'height':'7%', 'width':'auto'}),
+        ], className='row' style={'alignt-text':'left'}),
         html.Div([
             html.Hr(),
             html.Div(className='row', 
