@@ -170,7 +170,7 @@ server = app.server
 app.layout = html.Div(className='container',
     children=[
         Html.Div([
-            html.Img(src='https://fastfile.cloud/gptdevlogo.png', style={'height':'7%', 'width':'auto'}),
+            html.Img(src='https://fastfile.cloud/logos/gptdevlogo.png', style={'height':'7%', 'width':'auto'}),
         ], className='row' style={'alignt-text':'left'}),
         html.Div([
             html.Hr(),
