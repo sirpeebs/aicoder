@@ -198,12 +198,11 @@ app.layout = html.Div(className='container',
                                         id='language',
                                         value='\* Language: Python 3 \r\n',
                                         options=[
-                                            {'label': 'Python 3', 'value': '\* Language: Python 3 \r\n'},                                                    
-                                            {'label': 'Node.JS', 'value': '\* Language: node.js \r\n'},
-                                            {'label': 'SQL', 'value': '\* Language: SQL \r\n'},
-                                            {'label': 'Typescript', 'value': '\* Language: TypeScript \r\n'},
-                                            {'label': 'Bash', 'value': '\* Language: Bash \r\n'},
-                                            {'label': 'Task Helper', 'value': '\* Goal: Complete the task you are given. \r\n Task: '}
+                                            {'label': 'Python 3', 'value': 'Python 3'},                                                    
+                                            {'label': 'Node.JS', 'value': 'node.js'},
+                                            {'label': 'SQL', 'value': 'SQL'},
+                                            {'label': 'Typescript', 'value': 'Typescript'},
+                                            {'label': 'Shell', 'value': 'Shell'}
                                         ],
                                         style={'marginBottom':'.25rem'}
                                     ),
@@ -301,7 +300,7 @@ html.Div([
 def update_output(n_clicks, prompt, temperature, top_p, n, max_tokens, frequency_penalty, presence_penalty, stop, engine, language, packages):
     if n_clicks > 0:
         response = openai.Completion.create(
-            prompt= f"Language: {language} \r\n Packages: {packages} \r\n Goal: {prompt} \r\n\ Request: Achieve the goal by writing efficient code. \r\n */",
+            prompt= f'"""\r\n# {language}\r\n\#Packages to consider including: {packages}\r\n{prompt}\r\n"""',
             temperature=temperature,
             top_p=top_p,
             n=n,
