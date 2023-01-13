@@ -224,11 +224,13 @@ def update_output(n_clicks, prompt, temperature, top_p, n, max_tokens, frequency
     if n_clicks > 0:
         if language == 'regular_gpt':
             model='text-davinci-003'
+            prompt_value={prompt}
         else:
             model='code-davinci-002'
+            prompt_value= f'"""{language}\r\n{prompt}\r\n"""'
 
         response = openai.Completion.create(
-            prompt= f'"""{language}\r\n{prompt}\r\n"""',
+            prompt=prompt_value,
             temperature=temperature,
             top_p=top_p,
             n=n,
