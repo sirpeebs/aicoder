@@ -16,7 +16,7 @@ app.layout = html.Div(className='container',
     children=[
         html.Div([
             html.Center([
-            html.Img(src='https://fastfile.cloud/logos/gptdevlogo.png', style={'max-width':'45%', "margin-bottom":"1%", 'height':'auto','margin-top':'1%'}, className='center'),
+            html.Img(src='https://fastfile.cloud/logos/gptdevlogo.png', style={'max-width':'20%', "margin-bottom":"1%", 'height':'auto','margin-top':'1%'}, className='center'),
         ]),
             # html.Hr(),
             html.Div(className='row', 
@@ -226,7 +226,7 @@ def update_output(n_clicks, prompt, temperature, top_p, n, max_tokens, frequency
             model='text-davinci-003'
             prompt_value={prompt}
         else:
-            model='code-davinci-002'
+            model='text-davinci-003'
             prompt_value= f'"""{language}\r\n{prompt}\r\n"""'
 
         response = openai.Completion.create(
