@@ -227,7 +227,7 @@ def update_output(n_clicks, prompt, temperature, top_p, n, max_tokens, frequency
             prompt_value={prompt}
         else:
             model='text-davinci-003'
-            prompt_value= f'"""{language}\r\n{prompt}\r\n"""'
+            prompt_value= f'Setup as an expert coder in {language} who writes flawless code when given a requested goal.\r\nRequested Goal: {prompt}'
 
         response = openai.Completion.create(
             prompt=prompt_value,
